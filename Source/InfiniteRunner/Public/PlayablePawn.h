@@ -7,6 +7,7 @@
 #include "Camera/CameraComponent.h"
 #include "EnhancedInput/Public/InputActionValue.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "GameFramework/FloatingPawnMovement.h"
 #include "PlayablePawn.generated.h"
 
 // Forward declarations
@@ -28,6 +29,13 @@ protected:
 	virtual void BeginPlay() override;
 	
 	virtual void PawnClientRestart() override;
+
+#pragma region MOVEMENT
+
+	UPROPERTY(EditAnywhere)
+	UFloatingPawnMovement* Movement;
+
+#pragma endregion
 
 #pragma region MESH
 

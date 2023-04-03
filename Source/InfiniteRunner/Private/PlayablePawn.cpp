@@ -18,11 +18,12 @@ APlayablePawn::APlayablePawn()
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
     SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
-
+	Movement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("Movement"));
+	
 	// Declare root
 	RootComponent = Mesh;
-
-	// Setup Spring Arm
+	
+	// Setup spring arm
 	SpringArm->SetupAttachment(Mesh);
 	SpringArm->SetRelativeLocation(FVector(-100.f, 0.f, 50.f));
 	SpringArm->SetRelativeRotation(FRotator(0.f, -5.f, 0.f));
@@ -141,6 +142,7 @@ void APlayablePawn::Strafe(const FInputActionValue& Value)
 	if (input != 0.f)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Strafe: %f"), input);
+		AddMovementInput(GetActorRightVector(), input);
 	}
 }
 
