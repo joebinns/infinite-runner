@@ -34,6 +34,9 @@ void ATreadmill::Tick(float DeltaTime)
 
 void ATreadmill::Move(float DeltaTime)
 {
+	// TODO: Track total distance travelled
+	// TODO: Every length of a tile, spawn from TilesToPick
+	
 	for (const ATile* Tile : Tiles)
 	{
 		if (Tile != nullptr)

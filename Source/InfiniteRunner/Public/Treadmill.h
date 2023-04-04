@@ -23,12 +23,12 @@ protected:
 #pragma region TILES
 	
 	UPROPERTY(EditAnywhere, Category="Tiles")
-	TArray <ATile*> TilesToPick; // TODO: This should be BPs, not instances.
+	TArray<TSubclassOf<ATile>> TilesToPick;
 
 	UPROPERTY(EditAnywhere, Category="Tiles")
 	ATile* StartTile;
 	
-	TArray <ATile*> Tiles;
+	TArray<ATile*> Tiles;
 	
 #pragma endregion
 
