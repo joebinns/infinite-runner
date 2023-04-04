@@ -23,6 +23,11 @@ protected:
 #pragma region TILES
 	
 	UPROPERTY(EditAnywhere, Category="Tiles")
+	TArray <ATile*> TilesToPick; // TODO: This should be BPs, not instances.
+
+	UPROPERTY(EditAnywhere, Category="Tiles")
+	ATile* StartTile;
+	
 	TArray <ATile*> Tiles;
 	
 #pragma endregion
@@ -30,7 +35,7 @@ protected:
 #pragma region MOVEMENT
 
 	UPROPERTY(EditAnywhere, Category="Movement")
-	float Speed = 100.f;
+	float Speed = 1000.f;
 
 	void Move(float DeltaTime);
 

@@ -15,6 +15,11 @@ ATreadmill::ATreadmill()
 void ATreadmill::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (StartTile != nullptr)
+	{
+		Tiles.Add(StartTile);
+	}
 	
 }
 
@@ -29,12 +34,17 @@ void ATreadmill::Tick(float DeltaTime)
 
 void ATreadmill::Move(float DeltaTime)
 {
-	for (ATile* Tile : Tiles)
+	for (const ATile* Tile : Tiles)
 	{
-		Tile->GetRootComponent()->SetRelativeLocation(Tile->GetActorLocation() + -GetActorForwardVector() * Speed * DeltaTime);
+		if (Tile != nullptr)
+		{
+			Tile->GetRootComponent()->SetRelativeLocation(Tile->GetActorLocation() + -GetActorForwardVector() * Speed * DeltaTime);
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("A tile is a nullptr."));
+		}
 	}
-
-	// TODO: Trigger 'recycle' when a mesh has surpassed a certain distance
 	
 }
 
