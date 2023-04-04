@@ -31,7 +31,7 @@ void ATreadmill::Move(float DeltaTime)
 {
 	for (ATile* Tile : Tiles)
 	{
-		Tile->GetRootComponent()->SetRelativeLocation(Tile->GetActorLocation() + GetActorForwardVector() * Speed * DeltaTime);
+		Tile->GetRootComponent()->SetRelativeLocation(Tile->GetActorLocation() + -GetActorForwardVector() * Speed * DeltaTime);
 	}
 
 	// TODO: Trigger 'recycle' when a mesh has surpassed a certain distance
