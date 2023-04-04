@@ -114,26 +114,12 @@ bool APlayablePawn::GroundCheck()
 	QueryParams.AddIgnoredActor(this);
 
 	// To run the query, you need a pointer to the current level, which you can get from an Actor with GetWorld()
-	// UWorld()->LineTraceSingleByChannel runs a line trace and returns the first actor hit over the provided collision channel.
 	GetWorld()->LineTraceSingleByChannel(Hit, TraceStart, TraceEnd, GroundCheckTraceChannel, QueryParams);
 
 	// You can use DrawDebug helpers and the log to help visualize and debug your trace queries.
 	DrawDebugLine(GetWorld(), TraceStart, TraceEnd, Hit.bBlockingHit ? FColor::Blue : FColor::Red, false, 5.0f, 0, 10.0f);
-	//UE_LOG(LogTemp, Log, TEXT("Tracing line: %s to %s"), *TraceStart.ToCompactString(), *TraceEnd.ToCompactString());
 
-	bool didTraceHit = (Hit.bBlockingHit && IsValid(Hit.GetActor()));
-	
-	// If the trace hit something, bBlockingHit will be true,
-	// and its fields will be filled with detailed info about what was hit
-	if (didTraceHit)
-	{
-		//UE_LOG(LogTemp, Log, TEXT("Trace hit actor: %s"), *Hit.GetActor()->GetName());
-	}
-	else {
-		//UE_LOG(LogTemp, Log, TEXT("No Actors were hit"));
-	}
-
-	return didTraceHit;
+	return Hit.bBlockingHit && IsValid(Hit.GetActor());
 }
 
 void APlayablePawn::Strafe(const FInputActionValue& Value)
@@ -151,6 +137,7 @@ void APlayablePawn::Jump(const FInputActionValue& Value)
 	if (IsGrounded)
 	{
 	    UE_LOG(LogTemp, Warning, TEXT("Jump"));
+		// TODO: Jump using a curve
 	}
 }
 
@@ -159,5 +146,6 @@ void APlayablePawn::Slide(const FInputActionValue& Value)
 	if (IsGrounded)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Slide"));
+		// TODO: Slide using a curve
 	}
 }
