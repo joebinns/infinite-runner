@@ -16,6 +16,13 @@ public:
 	// Sets default values for this actor's properties
 	ATreadmill();
 
+#pragma region TILES
+	
+	UPROPERTY(BlueprintReadOnly, Category="Movement")
+	float DistanceTravelled;
+
+#pragma endregion
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -35,8 +42,7 @@ protected:
 	ATile* StartTile;
 	
 	TArray<ATile*> Tiles;
-
-	float DistanceTravelled;
+	
 	int NumTilesTravelled = 0;
 
 	FActorSpawnParameters SpawnParameters;
