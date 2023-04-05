@@ -35,6 +35,14 @@ protected:
 	ATile* StartTile;
 	
 	TArray<ATile*> Tiles;
+
+	float DistanceTravelled;
+	int NumTilesTravelled = 0;
+
+	FActorSpawnParameters SpawnParameters;
+
+	void SpawnTile(TSubclassOf<ATile> Tile);
+	void SpawnRandomTile();
 	
 #pragma endregion
 
