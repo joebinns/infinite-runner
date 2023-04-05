@@ -21,6 +21,12 @@ protected:
 	virtual void BeginPlay() override;
 
 #pragma region TILES
+
+	UPROPERTY(EditAnywhere, Category="Tiles")
+	float TileLength = 10000.f;
+
+	UPROPERTY(EditAnywhere, Category="Tiles")
+	FVector TileSpawnOffset = FVector(0.f, 0.f, -100.f);
 	
 	UPROPERTY(EditAnywhere, Category="Tiles")
 	TArray<TSubclassOf<ATile>> TilesToPick;

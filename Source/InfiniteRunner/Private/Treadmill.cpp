@@ -20,7 +20,17 @@ void ATreadmill::BeginPlay()
 	{
 		Tiles.Add(StartTile);
 	}
-	
+
+	for (TSubclassOf<ATile> Tile : TilesToPick)
+	{
+		if (Tile)
+		{
+			FActorSpawnParameters SpawnParams;
+			FTransform Transform = GetTransform();
+			Transform.SetLocation(Transform.GetLocation() + TileLength * GetActorForwardVector() + TileSpawnOffset);
+			Tiles.Add(GetWorld()->SpawnActor<ATile>(Tile, Transform, SpawnParams));
+		}
+	}
 }
 
 // Called every frame
@@ -39,7 +49,7 @@ void ATreadmill::Move(float DeltaTime)
 	
 	for (const ATile* Tile : Tiles)
 	{
-		if (Tile != nullptr)
+		if (Tile)
 		{
 			Tile->GetRootComponent()->SetRelativeLocation(Tile->GetActorLocation() + -GetActorForwardVector() * Speed * DeltaTime);
 		}
