@@ -20,8 +20,6 @@ void ATreadmill::BeginPlay()
 	{
 		Tiles.Add(StartTile);
 	}
-
-	SpawnRandomTile();
 }
 
 void ATreadmill::SpawnTile(TSubclassOf<ATile> Tile)
