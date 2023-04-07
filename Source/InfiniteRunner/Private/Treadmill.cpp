@@ -65,7 +65,16 @@ void ATreadmill::Move(float DeltaTime)
 	
 	if (DistanceTravelled / TileLength > NumTilesTravelled)
 	{
-		SpawnRandomTile();
+		if (NumTilesTravelled % TilesPerLevel != 0){
+			SpawnRandomTile();
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Leveled up after %f tiles!"), (float)NumTilesTravelled);
+			SpawnTile(LevelUpTile);
+			TilesPerLevel *= 2;
+		}
+		
 		NumTilesTravelled++;
 	}
 }

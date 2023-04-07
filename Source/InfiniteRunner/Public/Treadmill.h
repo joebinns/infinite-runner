@@ -36,10 +36,16 @@ protected:
 	FVector TileSpawnOffset = FVector(0.f, 0.f, -100.f);
 	
 	UPROPERTY(EditAnywhere, Category="Tiles")
+	int TilesPerLevel = 10;
+	
+	UPROPERTY(EditAnywhere, Category="Tiles")
 	TArray<TSubclassOf<ATile>> TilesToPick;
 
 	UPROPERTY(EditAnywhere, Category="Tiles")
 	ATile* StartTile;
+	
+	UPROPERTY(EditAnywhere, Category="Tiles")
+	TSubclassOf<ATile> LevelUpTile;
 	
 	TArray<ATile*> Tiles;
 	

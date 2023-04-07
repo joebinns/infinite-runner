@@ -127,7 +127,6 @@ void APlayablePawn::Strafe(const FInputActionValue& Value)
 	float input = Value.Get<float>();
 	if (input != 0.f)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Strafe: %f"), input);
 		AddMovementInput(GetActorRightVector(), input);
 	}
 }
