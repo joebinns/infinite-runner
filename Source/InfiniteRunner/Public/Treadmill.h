@@ -60,7 +60,7 @@ protected:
 
 #pragma region MOVEMENT
 
-	UPROPERTY(EditAnywhere, Category="Movement")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Movement")
 	float Speed = 1000.f;
 
 	void Move(float DeltaTime);
