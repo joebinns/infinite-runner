@@ -32,8 +32,8 @@ protected:
 
 #pragma region MOVEMENT
 
-	UPROPERTY(EditAnywhere)
-	UFloatingPawnMovement* Movement;
+	UPROPERTY(EditAnywhere, Category="Movement")
+	float LaneWidth = 250.f;
 
 #pragma endregion
 

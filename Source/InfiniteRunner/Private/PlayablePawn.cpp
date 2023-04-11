@@ -4,6 +4,7 @@
 #include "PlayablePawn.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "IPropertyUtilities.h"
 #include "Components/InputComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Engine/World.h"
@@ -18,7 +19,6 @@ APlayablePawn::APlayablePawn()
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
     SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
-	Movement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("Movement"));
 	
 	// Declare root
 	RootComponent = Mesh;
@@ -65,7 +65,7 @@ void APlayablePawn::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 		// This calls the handler function on the tick when MyInputAction starts, such as when pressing an action button.
 		if (StrafeAction)
 		{
-			PlayerEnhancedInputComponent->BindAction(StrafeAction, ETriggerEvent::Triggered, this, &APlayablePawn::Strafe);
+			PlayerEnhancedInputComponent->BindAction(StrafeAction, ETriggerEvent::Started, this, &APlayablePawn::Strafe);
 		}
 
 		if (JumpAction)
@@ -127,7 +127,8 @@ void APlayablePawn::Strafe(const FInputActionValue& Value)
 	float input = Value.Get<float>();
 	if (input != 0.f)
 	{
-		AddMovementInput(GetActorRightVector(), input);
+		FHitResult hit;
+		SetActorRelativeLocation(GetActorLocation() + input * GetActorRightVector() * LaneWidth, true, &hit, ETeleportType::TeleportPhysics);
 	}
 }
 
