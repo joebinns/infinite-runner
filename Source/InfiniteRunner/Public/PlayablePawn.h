@@ -33,6 +33,9 @@ protected:
 #pragma region MOVEMENT
 
 	UPROPERTY(EditAnywhere, Category="Movement")
+	int CurrentLane = 0;
+	
+	UPROPERTY(EditAnywhere, Category="Movement")
 	float LaneWidth = 250.f;
 
 #pragma endregion

@@ -26,9 +26,9 @@ APlayablePawn::APlayablePawn()
 	// Setup spring arm
 	SpringArm->SetupAttachment(Mesh);
 	SpringArm->SetRelativeLocation(FVector(-100.f, 0.f, 50.f));
-	SpringArm->SetRelativeRotation(FRotator(0.f, -5.f, 0.f));
+	SpringArm->SetRelativeRotation(FRotator(-10.f, 0.f, 0.f));
 	SpringArm->bEnableCameraLag = true;
-	SpringArm->CameraLagSpeed = 50.f;
+	SpringArm->CameraLagSpeed = 200.f;
 	SpringArm->TargetArmLength = 200.f;
 
 	// Setup camera
@@ -128,7 +128,9 @@ void APlayablePawn::Strafe(const FInputActionValue& Value)
 	if (input != 0.f)
 	{
 		FHitResult hit;
-		SetActorRelativeLocation(GetActorLocation() + input * GetActorRightVector() * LaneWidth, true, &hit, ETeleportType::TeleportPhysics);
+		CurrentLane += input;
+		CurrentLane = FMath::Clamp(CurrentLane, -1, 1);
+		SetActorLocation(CurrentLane * GetActorRightVector() * LaneWidth, true, &hit, ETeleportType::TeleportPhysics);
 	}
 }
 
