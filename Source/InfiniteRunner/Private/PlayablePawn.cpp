@@ -41,7 +41,6 @@ APlayablePawn::APlayablePawn()
 void APlayablePawn::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
