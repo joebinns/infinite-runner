@@ -18,7 +18,7 @@ UHighScores::UHighScores()
 /*
  * Places the named score appropriately within the high scores.
  */
-void UHighScores::Score(FNamedScore NamedScore)
+void UHighScores::AddScore(FNamedScore NamedScore)
 {
 	HighScores.Add(NamedScore);
 	HighScores.Sort();

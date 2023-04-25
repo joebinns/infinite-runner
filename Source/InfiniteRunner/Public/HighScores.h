@@ -44,7 +44,7 @@ class INFINITERUNNER_API UHighScores : public USaveGame
 		UHighScores();
 	
 		UFUNCTION(BlueprintCallable, Category="HighScores")
-		void Score(FNamedScore NamedScore);
+		void AddScore(FNamedScore NamedScore);
 
 	protected: 
 		UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="HighScores")
