@@ -4,7 +4,6 @@
 #include "PlayablePawn.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
-#include "IPropertyUtilities.h"
 #include "Components/InputComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Engine/World.h"

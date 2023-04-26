@@ -21,6 +21,10 @@ UHighScores::UHighScores()
 void UHighScores::AddScore(FNamedScore NamedScore)
 {
 	HighScores.Add(NamedScore);
-	HighScores.Sort();
+	HighScores.Sort( 
+		[](const FNamedScore& a, const FNamedScore& b)
+		{
+			return a.Score > b.Score;
+		}); // Sort in descending order
 	if (HighScores.Num() > MAX_NUM_HIGH_SCORES) HighScores.RemoveAt(HighScores.Num()-1);
 }

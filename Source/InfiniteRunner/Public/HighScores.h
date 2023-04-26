@@ -28,11 +28,6 @@ struct FNamedScore
 		Name = name;
 		Score = score;
 	}
-
-	bool operator <(const FNamedScore& Other) const
-	{
-		return Score < Other.Score;
-	}
 };
 
 UCLASS()
