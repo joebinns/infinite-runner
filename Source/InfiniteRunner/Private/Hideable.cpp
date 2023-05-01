@@ -1,12 +1,12 @@
 // Copyright 2023 Joe Binns, All Rights Reserved.
 
 
-#include "DynamicObstacle.h"
+#include "Hideable.h"
 #include "TimerManager.h"
 #include "Math/Vector.h"
 
 // Sets default values for this component's properties
-UDynamicObstacle::UDynamicObstacle()
+UHideable::UHideable()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
@@ -17,24 +17,24 @@ UDynamicObstacle::UDynamicObstacle()
 
 
 // Called when the game starts
-void UDynamicObstacle::BeginPlay()
+void UHideable::BeginPlay()
 {
 	Super::BeginPlay();
 
 	// ...
-
+	
 	// Call Hide every frame
 	TimerStartTime = FDateTime::Now();
-	GetWorld()->GetTimerManager().SetTimer(HideTimerHandle, this, &UDynamicObstacle::Hide, 0.01f, true);
+	GetWorld()->GetTimerManager().SetTimer(HideTimerHandle, this, &UHideable::Hide, 0.01f, true);
 	// NOTE: In the future, I could just use UKismetSystemLibrary::MoveComponentTo()
 	
 	UE_LOG(LogTemp, Warning, TEXT("Run"));
 }
 
-void UDynamicObstacle::Hide()
+void UHideable::Hide()
 {
 	const float Time = (FDateTime::Now() - TimerStartTime).GetTotalSeconds();
-    const float Duration = HideCurve->FloatCurve.GetLastKey().Time;
+	const float Duration = HideCurve->FloatCurve.GetLastKey().Time;
 	UE_LOG(LogTemp, Warning, TEXT("Time: %f"), Time);
 	UE_LOG(LogTemp, Warning, TEXT("Duration: %f"), Duration);
 	if (Time >= Duration)
@@ -46,8 +46,9 @@ void UDynamicObstacle::Hide()
 	GetAttachParent()->SetRelativeLocation(GetUpVector() * VerticalDisplacement);
 }
 
+
 // Called every frame
-void UDynamicObstacle::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UHideable::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
