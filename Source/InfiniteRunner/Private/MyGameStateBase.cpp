@@ -18,20 +18,18 @@ void AMyGameStateBase::BeginPlay()
 
 void AMyGameStateBase::GameOver()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Game Over"));
-	
-	bool AreAllPlayersAlive = false;
+	bool AreAllPlayersDead = true;
 	for (APlayerState* PlayerState : PlayerArray)
 	{
 		APlayablePlayerState* PlayablePlayerState = Cast<APlayablePlayerState>(PlayerState);
-		AreAllPlayersAlive = PlayablePlayerState->IsAlive();
-		if (!AreAllPlayersAlive)
+		AreAllPlayersDead = !PlayablePlayerState->IsAlive();
+		if (!AreAllPlayersDead)
 		{
 			break;
 		}
 	}
 
-	if (AreAllPlayersAlive)
+	if (AreAllPlayersDead)
 	{
 		// TODO: Open enter name
 		
