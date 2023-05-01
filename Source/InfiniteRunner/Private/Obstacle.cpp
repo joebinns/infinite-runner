@@ -2,8 +2,8 @@
 
 
 #include "Obstacle.h"
-
 #include "PlayablePawn.h"
+#include "PlayablePlayerState.h"
 
 // Sets default values for this component's properties
 UObstacle::UObstacle()
@@ -30,21 +30,15 @@ void UObstacle::BeginPlay()
 
 void UObstacle::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Begin"));
+	UE_LOG(LogTemp, Warning, TEXT("Overlap"));
 
 	const APlayablePawn* Player = Cast<APlayablePawn>(OtherActor);
-	// TODO: Move BP player controller to C++...
-		// TODO: Health (PLAYER STATE)
-		// TODO: Die (transition to next scene) (GAME STATE)
-	
-	
-	// TODO: Decrease health
-	// TODO: Copy this script to target, which then needs to be adapted for triggering upcoming obstacles (and triggers) to dissapear
+	if (!Player) return;
+	Player->GetController()->GetPlayerState<APlayablePlayerState>()->DecrementHealth();
 }
 
 void UObstacle::OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	UE_LOG(LogTemp, Warning, TEXT("End"));
 }
 
 

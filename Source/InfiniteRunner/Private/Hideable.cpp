@@ -28,7 +28,7 @@ void UHideable::BeginPlay()
 	GetWorld()->GetTimerManager().SetTimer(HideTimerHandle, this, &UHideable::Hide, 0.01f, true);
 	// NOTE: In the future, I could just use UKismetSystemLibrary::MoveComponentTo()
 	
-	UE_LOG(LogTemp, Warning, TEXT("Run"));
+	UE_LOG(LogTemp, Warning, TEXT("Hide"));
 }
 
 void UHideable::Hide()

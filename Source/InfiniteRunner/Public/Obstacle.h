@@ -3,14 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/SceneComponent.h"
-#include "Components/BoxComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "Obstacle.generated.h"
 
-// TODO: Add Box, which decrements the health when hit
-
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class INFINITERUNNER_API UObstacle : public UBoxComponent
+class INFINITERUNNER_API UObstacle : public UStaticMeshComponent
 {
 	GENERATED_BODY()
 

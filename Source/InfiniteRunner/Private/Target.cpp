@@ -2,6 +2,8 @@
 
 
 #include "Target.h"
+#include "PlayablePawn.h"
+#include "PlayablePlayerState.h"
 
 // Sets default values for this component's properties
 UTarget::UTarget()
@@ -11,8 +13,11 @@ UTarget::UTarget()
 	PrimaryComponentTick.bCanEverTick = true;
 
 	// ...
-}
+	
+	this->OnComponentBeginOverlap.AddDynamic(this, &UTarget::OnOverlapBegin);
+	this->OnComponentEndOverlap.AddDynamic(this, &UTarget::OnOverlapEnd);
 
+}
 
 // Called when the game starts
 void UTarget::BeginPlay()
@@ -21,6 +26,17 @@ void UTarget::BeginPlay()
 
 	// ...
 	
+}
+
+void UTarget::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Overlap"));
+	
+	// TODO: Trigger upcoming obstacles (and triggers) to dissappear
+}
+
+void UTarget::OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
 }
 
 
