@@ -3,6 +3,8 @@
 
 #include "MyGameStateBase.h"
 #include "PlayablePlayerState.h"
+#include "Blueprint/UserWidget.h"
+#include "Blueprint/WidgetLayoutLibrary.h"
 #include "GameFramework/PlayerState.h"
 
 void AMyGameStateBase::BeginPlay()
@@ -31,7 +33,20 @@ void AMyGameStateBase::GameOver()
 
 	if (AreAllPlayersDead)
 	{
-		// TODO: Open enter name
-		
+		ShowEnterName();
 	}
 }
+
+void AMyGameStateBase::ShowEnterName()
+{
+	if (!IsValid(EnterNameWidgetClass)) return;
+	
+    UWidgetLayoutLibrary::RemoveAllWidgets(this);
+	
+    EnterNameWidget = Cast<UUserWidget>(CreateWidget(GetWorld(), EnterNameWidgetClass));
+	if (!EnterNameWidget) return;
+	
+	EnterNameWidget->AddToViewport();
+}
+
+

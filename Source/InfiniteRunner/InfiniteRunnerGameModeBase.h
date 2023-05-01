@@ -13,5 +13,4 @@ UCLASS()
 class INFINITERUNNER_API AInfiniteRunnerGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
-	
 };
