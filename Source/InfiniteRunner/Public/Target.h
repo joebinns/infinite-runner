@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/BoxComponent.h"
+#include "Hideable.h"
 #include "Target.generated.h"
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -18,6 +19,12 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+
+	UPROPERTY(EditAnywhere, meta=(UseComponentPicker, AllowAnyActor))
+	FComponentReference NextRowReference; // TODO: Fix this
+	
+	UPROPERTY()
+	UHideable* NextRow;
 
 public:	
 	// Called every frame

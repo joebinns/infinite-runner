@@ -22,7 +22,10 @@ void UHideable::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
-	
+}
+
+void UHideable::StartHide()
+{
 	// Call Hide every frame
 	TimerStartTime = FDateTime::Now();
 	GetWorld()->GetTimerManager().SetTimer(HideTimerHandle, this, &UHideable::Hide, 0.01f, true);

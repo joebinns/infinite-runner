@@ -17,6 +17,7 @@ UTarget::UTarget()
 	this->OnComponentBeginOverlap.AddDynamic(this, &UTarget::OnOverlapBegin);
 	this->OnComponentEndOverlap.AddDynamic(this, &UTarget::OnOverlapEnd);
 
+	NextRow = Cast<UHideable>(NextRowReference.GetComponent(GetOwner()));
 }
 
 // Called when the game starts
@@ -31,8 +32,11 @@ void UTarget::BeginPlay()
 void UTarget::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Overlap"));
-	
-	// TODO: Trigger upcoming obstacles (and triggers) to dissappear
+
+	if (!NextRow) return;
+	NextRow->StartHide();
+
+	UE_LOG(LogTemp, Warning, TEXT("Start Hide"));
 }
 
 void UTarget::OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)

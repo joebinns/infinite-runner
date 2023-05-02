@@ -75,7 +75,10 @@ protected:
 	
 	// Input Actions
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Controls|Input Actions")
-	UInputAction* StrafeAction;
+	UInputAction* StrafeP1Action;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Controls|Input Actions")
+    UInputAction* StrafeP2Action;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Controls|Input Actions")
 	UInputAction* JumpAction;
@@ -100,6 +103,8 @@ protected:
 private:
 	APlayerController* PlayerController;
 	UEnhancedInputLocalPlayerSubsystem* SubSystem;
+
+	FVector SpawnLocation;
 	
 public:	
 	// Called every frame

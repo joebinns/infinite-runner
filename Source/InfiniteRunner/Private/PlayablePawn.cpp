@@ -2,11 +2,14 @@
 
 
 #include "PlayablePawn.h"
+#include "EngineUtils.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Components/InputComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Engine/World.h"
+#include "InfiniteRunner/InfiniteRunnerGameModeBase.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 APlayablePawn::APlayablePawn()
@@ -40,6 +43,8 @@ APlayablePawn::APlayablePawn()
 void APlayablePawn::BeginPlay()
 {
 	Super::BeginPlay();
+
+	SpawnLocation = GetActorLocation();
 }
 
 // Called every frame
@@ -60,20 +65,37 @@ void APlayablePawn::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	{
 		// There are ways to bind a UInputAction* to a handler function and multiple types of ETriggerEvent that may be of interest.
 		
+		AInfiniteRunnerGameModeBase* GameMode = Cast<AInfiniteRunnerGameModeBase>(GetWorld()->GetAuthGameMode());
+		const int NumPlayers = GameMode->GetNumPlayers();
+		
 		// This calls the handler function on the tick when MyInputAction starts, such as when pressing an action button.
-		if (StrafeAction)
+		if (NumPlayers == 1)
 		{
-			PlayerEnhancedInputComponent->BindAction(StrafeAction, ETriggerEvent::Started, this, &APlayablePawn::Strafe);
+			if (StrafeP1Action)
+			{
+				PlayerEnhancedInputComponent->BindAction(StrafeP1Action, ETriggerEvent::Started, this, &APlayablePawn::Strafe);
+				UE_LOG(LogTemp, Warning, TEXT("Assigned player 1 input"));
+			}
+			
+			if (JumpAction)
+            {
+            	PlayerEnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &APlayablePawn::Jump);
+            }
 		}
-
-		if (JumpAction)
+		else if (NumPlayers == 2)
 		{
-			PlayerEnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &APlayablePawn::Jump);
-		}
+			// TODO: Then make it an AI
+			
+			if (StrafeP2Action)
+			{
+				PlayerEnhancedInputComponent->BindAction(StrafeP2Action, ETriggerEvent::Started, this, &APlayablePawn::Strafe);
+				UE_LOG(LogTemp, Warning, TEXT("Assigned player 2 input"));
+			}
 
-		if (SlideAction)
-		{
-			PlayerEnhancedInputComponent->BindAction(SlideAction, ETriggerEvent::Started, this, &APlayablePawn::Slide);
+			if (SlideAction)
+			{
+				PlayerEnhancedInputComponent->BindAction(SlideAction, ETriggerEvent::Started, this, &APlayablePawn::Slide);
+			}
 		}
 	}
 }
@@ -122,13 +144,15 @@ bool APlayablePawn::GroundCheck()
 
 void APlayablePawn::Strafe(const FInputActionValue& Value)
 {
+	UE_LOG(LogTemp, Warning, TEXT("Move"));
+	
 	float input = Value.Get<float>();
 	if (input != 0.f)
 	{
 		FHitResult hit;
 		CurrentLane += input;
 		CurrentLane = FMath::Clamp(CurrentLane, -1, 1);
-		SetActorLocation(CurrentLane * GetActorRightVector() * LaneWidth, true, &hit, ETeleportType::TeleportPhysics);
+		SetActorLocation(SpawnLocation + CurrentLane * GetActorRightVector() * LaneWidth, true, &hit, ETeleportType::TeleportPhysics);
 	}
 }
 
