@@ -8,17 +8,22 @@ void AAIPlayerPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	ObstacleCheck();
+	// TODO: Use 3 line traces to determine which lane to use, move to the lane by strafing with account to the current lane
+
+	ObstacleCheck(-1);
+	ObstacleCheck(0);
+	ObstacleCheck(1);
+	
 }
 
-bool AAIPlayerPawn::ObstacleCheck()
+bool AAIPlayerPawn::ObstacleCheck(int LaneIndex)
 {
 	// FHitResult will hold all data returned by our line collision query
 	FHitResult Hit;
 
 	// We set up a line trace from our current location to a point below
-	FVector TraceStart = GetActorLocation();
-	FVector TraceEnd = GetActorLocation() + GetActorForwardVector() * ObstacleCheckTraceDistance;
+	FVector TraceStart = SpawnLocation + GetActorRightVector() * LaneWidth * LaneIndex;
+	FVector TraceEnd = TraceStart + GetActorForwardVector() * ObstacleCheckTraceDistance;
 
 	// You can use FCollisionQueryParams to further configure the query
 	// Here we add ourselves to the ignored list so we won't block the trace

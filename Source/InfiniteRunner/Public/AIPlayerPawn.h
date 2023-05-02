@@ -14,8 +14,6 @@ class INFINITERUNNER_API AAIPlayerPawn : public APlayerPawn
 {
 	GENERATED_BODY()
 
-	// TODO: Line Trace to see upcoming obstacles, and strafe accordingly
-
 protected:
 #pragma region OBSTACLE_CHECK
 		
@@ -25,7 +23,7 @@ protected:
 		UPROPERTY(EditAnywhere, Category="Obstacle Check")
 		TEnumAsByte<ECollisionChannel> ObstacleCheckTraceChannel = ECC_Visibility;
 
-		bool ObstacleCheck();
+		bool ObstacleCheck(int LaneIndex);
 
 #pragma endregion
 
