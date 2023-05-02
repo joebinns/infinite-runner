@@ -15,5 +15,22 @@ class INFINITERUNNER_API AAIPlayerPawn : public APlayerPawn
 	GENERATED_BODY()
 
 	// TODO: Line Trace to see upcoming obstacles, and strafe accordingly
+
+protected:
+#pragma region OBSTACLE_CHECK
+		
+		UPROPERTY(EditAnywhere, Category="Obstacle Check")
+		float ObstacleCheckTraceDistance = 200.f;
+		
+		UPROPERTY(EditAnywhere, Category="Obstacle Check")
+		TEnumAsByte<ECollisionChannel> ObstacleCheckTraceChannel = ECC_Visibility;
+
+		bool ObstacleCheck();
+
+#pragma endregion
+
+public:
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 	
 };

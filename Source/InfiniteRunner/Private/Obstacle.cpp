@@ -2,7 +2,7 @@
 
 
 #include "Obstacle.h"
-#include "PlayerPawn.h"
+#include "PlayablePlayerPawn.h"
 #include "PlayablePlayerState.h"
 
 // Sets default values for this component's properties
@@ -32,7 +32,7 @@ void UObstacle::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class 
 {
 	UE_LOG(LogTemp, Warning, TEXT("Obstacle Encountered"));
 
-	const APlayerPawn* Player = Cast<APlayerPawn>(OtherActor);
+	const APlayablePlayerPawn* Player = Cast<APlayablePlayerPawn>(OtherActor);
 	if (!Player) return;
 	Player->GetController()->GetPlayerState<APlayablePlayerState>()->DecrementHealth();
 	
