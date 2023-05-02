@@ -18,7 +18,7 @@ protected:
 #pragma region OBSTACLE_CHECK
 		
 		UPROPERTY(EditAnywhere, Category="Obstacle Check")
-		float ObstacleCheckTraceDistance = 200.f;
+		float ObstacleCheckTraceDistance = 300.f;
 		
 		UPROPERTY(EditAnywhere, Category="Obstacle Check")
 		TEnumAsByte<ECollisionChannel> ObstacleCheckTraceChannel = ECC_Visibility;
