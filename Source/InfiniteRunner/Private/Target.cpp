@@ -2,7 +2,6 @@
 
 
 #include "Target.h"
-#include "PlayablePawn.h"
 #include "PlayablePlayerState.h"
 
 // Sets default values for this component's properties
@@ -31,7 +30,7 @@ void UTarget::BeginPlay()
 
 void UTarget::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Overlap"));
+	UE_LOG(LogTemp, Warning, TEXT("Target Encountered"));
 
 	if (!NextRow) return;
 	NextRow->StartHide();

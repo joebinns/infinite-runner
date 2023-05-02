@@ -2,7 +2,7 @@
 
 
 #include "Obstacle.h"
-#include "PlayablePawn.h"
+#include "PlayerPawn.h"
 #include "PlayablePlayerState.h"
 
 // Sets default values for this component's properties
@@ -30,11 +30,13 @@ void UObstacle::BeginPlay()
 
 void UObstacle::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Overlap"));
+	UE_LOG(LogTemp, Warning, TEXT("Obstacle Encountered"));
 
-	const APlayablePawn* Player = Cast<APlayablePawn>(OtherActor);
+	const APlayerPawn* Player = Cast<APlayerPawn>(OtherActor);
 	if (!Player) return;
 	Player->GetController()->GetPlayerState<APlayablePlayerState>()->DecrementHealth();
+	
+	UE_LOG(LogTemp, Warning, TEXT("Lose Health"));
 }
 
 void UObstacle::OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
