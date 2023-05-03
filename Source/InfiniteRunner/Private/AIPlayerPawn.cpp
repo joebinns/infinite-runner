@@ -22,7 +22,7 @@ bool AAIPlayerPawn::ObstacleCheck(int LaneIndex)
 	// FHitResult will hold all data returned by our line collision query
 	FHitResult Hit;
 
-	// We set up a line trace from our current location to a point below
+	// We set up a line trace from our current location to a forward point
 	FVector TraceStart = SpawnLocation + GetActorRightVector() * LaneWidth * LaneIndex;
 	FVector TraceEnd = TraceStart + GetActorForwardVector() * ObstacleCheckTraceDistance;
 

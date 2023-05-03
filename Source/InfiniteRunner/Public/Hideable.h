@@ -28,6 +28,7 @@ protected:
 	FTimerHandle HideTimerHandle;
 	FDateTime TimerStartTime;
 
+    FVector SpawnLocation;
 
 public:	
 	// Called every frame

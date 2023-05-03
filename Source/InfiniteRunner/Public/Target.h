@@ -19,9 +19,9 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
-
-	UPROPERTY(EditAnywhere, meta=(UseComponentPicker, AllowAnyActor))
-	FComponentReference NextRowReference; // TODO: Fix this
+	
+	UPROPERTY(EditAnywhere)
+	FComponentReference NextRowReference;
 	
 	UPROPERTY()
 	UHideable* NextRow;

@@ -22,6 +22,8 @@ void UHideable::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
+
+	SpawnLocation = GetRelativeLocation();
 }
 
 void UHideable::StartHide()
@@ -46,7 +48,7 @@ void UHideable::Hide()
 	}
 	
 	const float VerticalDisplacement = HideCurve->GetFloatValue(Time);
-	GetAttachParent()->SetRelativeLocation(GetUpVector() * VerticalDisplacement);
+	GetAttachParent()->SetRelativeLocation(SpawnLocation + GetUpVector() * VerticalDisplacement);
 }
 
 

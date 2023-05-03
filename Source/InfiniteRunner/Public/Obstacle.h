@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/StaticMeshComponent.h"
+#include "Components/BoxComponent.h"
 #include "Obstacle.generated.h"
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class INFINITERUNNER_API UObstacle : public UStaticMeshComponent
+class INFINITERUNNER_API UObstacle : public UBoxComponent
 {
 	GENERATED_BODY()
 
