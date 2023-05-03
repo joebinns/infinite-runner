@@ -23,7 +23,7 @@ void UHideable::BeginPlay()
 
 	// ...
 
-	SpawnLocation = GetRelativeLocation();
+	SpawnLocation = GetAttachParent()->GetRelativeLocation();
 }
 
 void UHideable::StartHide()
@@ -40,8 +40,6 @@ void UHideable::Hide()
 {
 	const float Time = (FDateTime::Now() - TimerStartTime).GetTotalSeconds();
 	const float Duration = HideCurve->FloatCurve.GetLastKey().Time;
-	UE_LOG(LogTemp, Warning, TEXT("Time: %f"), Time);
-	UE_LOG(LogTemp, Warning, TEXT("Duration: %f"), Duration);
 	if (Time >= Duration)
 	{
 		GetWorld()->GetTimerManager().ClearTimer(HideTimerHandle);

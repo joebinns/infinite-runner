@@ -7,6 +7,11 @@
 
 UObstacle::UObstacle()
 {
+}
+
+void UObstacle::BeginPlay()
+{
+	Super::BeginPlay();
 	this->OnComponentBeginOverlap.AddDynamic(this, &UObstacle::OnOverlapBegin);
 }
 

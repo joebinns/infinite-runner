@@ -30,7 +30,7 @@ void UTarget::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AA
 	UE_LOG(LogTemp, Warning, TEXT("Target Encountered"));
 
 	if (!NextRow) return;
-	if (FMath::RandRange(1, 100) <= 85  ? true : false) return; // Only act 15% of the time
+	if (FMath::RandRange(1, 100) <= 50  ? true : false) return; // Only act 50% of the time
 	NextRow->StartHide();
 
 	UE_LOG(LogTemp, Warning, TEXT("Start Hide"));
