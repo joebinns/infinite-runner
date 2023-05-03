@@ -23,6 +23,7 @@ void UTarget::BeginPlay()
 	Super::BeginPlay();
 
 	NextRow = Cast<UHideable>(NextRowReference.GetComponent(GetOwner()));
+	// TODO: Prevent calling further upcoming rows...
 }
 
 void UTarget::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
