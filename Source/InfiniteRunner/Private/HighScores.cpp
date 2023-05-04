@@ -5,7 +5,7 @@
 
 UHighScores::UHighScores()
 {
-	// TODO: Load high scores from GameSave
+	// TODO: SAVE AND LOAD
 	HighScores = {
 		FNamedScore(FText::FromString("Joe"), 0),
 		FNamedScore(FText::FromString("Bob"), 1),
